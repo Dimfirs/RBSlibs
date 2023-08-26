@@ -1,0 +1,18 @@
+name: Test commit and pr
+
+on:
+  pull_request:
+  push:
+
+jobs:
+
+  build-with-gcc:
+    strategy:
+      matrix:
+        os: [ubuntu-20.04, ubuntu-22.04,ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Build with Makefile
+        run: g++ *.cpp -luuid
